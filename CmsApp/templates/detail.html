@@ -1,0 +1,27 @@
+% extends 'base.html' %}
+
+{% block content %}
+    <h1>Documentaries</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Skill Level</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for documentary in documentaries %}
+                <tr>
+                    <td>{{ documentary.title }}</td>
+                    <td>{{ documentary.skill_level }}</td>
+                    <td>
+                        <a href="{% url 'documentary-detail' documentary.id %}">View</a>
+                        <a href="{% url 'documentary-update' documentary.id %}">Edit</a>
+                        <a href="{% url 'documentary-delete' documentary.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

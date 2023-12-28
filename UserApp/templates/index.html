@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+  <title>Sign Up</title>
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+{% endblock %}
+{% block styles %}
+  <style>
+    body {
+      background-color: #c8f2f8;
+      justify-content: center;
+      align-items: center;
+    }
+    .form {
+      width: 300px;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      animation: fade-in 1s ease-in-out;
+    }
+    @keyframes fade-in {
+      from {
+        transform: translateY(-2rem);
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>WELCOME TO MAIN PAGE </h1>
+
+{% endblock %}
+{% block javascripts %}
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    
+    $(document).on('submit', '#login', function (e) {
+      e.preventDefault();
+      $('#success').html('')
+      $.ajax({
+          type: 'POST',
+          url: "{% url 'login' %}",
+          data: {
+            username: $('#username').val(),
+            password: $('#password').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+          },
+          success: function (data) {
+            if(data.error) {
+              $('#success').html(data.erorr)
+            }
+            else if (data.success) {
+              window.location.href = "/index.html"; // Redirect to index.html upon success
+          }
+          }
+      })
+  })
+  </script>
+{% endblock %}
+

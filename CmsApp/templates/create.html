@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ documentary.title }}</h1>
+    <p>Skill Level: {{ documentary.skill_level }}</p>
+    <a href="{% url 'documentary-update' documentary.id %}">Edit</a>
+    <a href="{% url 'documentary-delete' documentary.id %}">Delete</a>
+{% endblock %}
