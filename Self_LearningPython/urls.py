@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import include, path
+# urls.py
+from django.conf import settings
+from django.conf.urls.static import static
+
 import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__',include(debug_toolbar.urls)),
-    path('', include('UserApp.urls')),
-    path('',include('CmsApp.urls'))
-]
+    path('', include('UserApp.urls'))
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns 
